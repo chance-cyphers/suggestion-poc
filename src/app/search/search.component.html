@@ -1,0 +1,11 @@
+<div>
+  <p>
+    search works!
+  </p>
+  <input (keyup)="searchTerm$.next($event.target.value)">
+  <ul>
+    <li *ngFor="let result of results">
+      {{result.firstname}}
+    </li>
+  </ul>
+</div>
