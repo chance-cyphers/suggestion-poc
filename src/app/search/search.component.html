@@ -6,7 +6,9 @@
            (keydown.arrowup)="onUp($event)"
            (keydown.arrowdown)="onDown($event)">
     <ul class="search-result">
-      <li *ngFor="let result of results; let i = index" [class.selected]="i === selectionIndex">
+      <li *ngFor="let result of results; let i = index"
+          [class.selected]="i === selectionIndex"
+          (mouseenter)="onMouse(i)">
         {{result}}: {{i}}
       </li>
     </ul>

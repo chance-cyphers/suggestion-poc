@@ -13,7 +13,6 @@ export class SearchComponent implements OnInit {
   results: string[];
   selectionIndex = -1;
 
-
   constructor(private searchService: SearchService) {
   }
 
@@ -23,7 +22,7 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  onDown(event) {
+  onDown() {
     if (this.selectionIndex < this.results.length - 1) {
       this.selectionIndex++;
     }
@@ -36,4 +35,7 @@ export class SearchComponent implements OnInit {
       });
   }
 
+  onMouse(index) {
+    this.selectionIndex = index;
+  }
 }
