@@ -1,8 +1,8 @@
 import {BankAccount} from './BankAccount';
 
 export class SearchResult {
-  took: number
   hits: Hits
+  suggest: Suggest
 }
 
 class Hits {
@@ -11,4 +11,16 @@ class Hits {
 
 class Hit {
   _source: BankAccount
+}
+
+class Suggest {
+  peepsSuggest: SuggestOptions[]
+}
+
+class SuggestOptions {
+  options: SuggestionOption[]
+}
+
+class SuggestionOption {
+  text: string
 }

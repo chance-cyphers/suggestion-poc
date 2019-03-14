@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {catchError, debounceTime, distinctUntilChanged, flatMap, map, switchMap, tap} from 'rxjs/operators';
+import {catchError, debounceTime, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {SearchResult} from './SearchResult';
 import {BankAccount} from './BankAccount';
@@ -13,7 +13,7 @@ export class SearchService {
   constructor(private http: HttpClient) {
   }
 
-  search(terms: Observable<string>): Observable<BankAccount[]> {
+  search(terms: Observable<string>): Observable<string[]> {
     return terms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
@@ -21,18 +21,27 @@ export class SearchService {
     );
   }
 
-  searchEntries(term): Observable<BankAccount[]> {
-    let observable = this.http
-      .get<SearchResult>('http://localhost:9200/bank/_search').pipe(
+  searchEntries(term): Observable<string[]> {
+    return this.http
+      .post<SearchResult>('http://localhost:9200/person/peeps/_search', {
+        'suggest': {
+          'peepsSuggest': {
+            'prefix': term,
+            'completion': {
+              'field': 'name'
+            }
+          }
+        },
+      }).pipe(
         map(data => {
-          return data.hits.hits.map(hit => hit._source);
+          // return data.hits.hits.map(hit => hit._source);
+          return data.suggest.peepsSuggest[0].options.map(o => o.text)
         }),
         catchError((err) => {
           console.error(err);
           return of(err);
         })
       );
-    return observable;
   }
 
 }

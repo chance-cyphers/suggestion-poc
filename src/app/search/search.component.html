@@ -3,7 +3,7 @@
     <input #searchBox id="search-box" (keyup)="searchTerm$.next($event.target.value)">
     <ul class="search-result">
       <li *ngFor="let result of results">
-        {{result.firstname}}
+        {{result}}
       </li>
     </ul>
   </div>
