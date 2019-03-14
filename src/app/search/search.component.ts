@@ -16,6 +16,13 @@ export class SearchComponent implements OnInit {
   constructor(private searchService: SearchService) {
   }
 
+  ngOnInit() {
+    this.searchService.search(this.searchTerm$)
+      .subscribe(results => {
+        this.results = results;
+      });
+  }
+
   onUp() {
     if (this.selectionIndex > -1) {
       this.selectionIndex--;
@@ -28,14 +35,13 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.searchService.search(this.searchTerm$)
-      .subscribe(results => {
-        this.results = results;
-      });
-  }
 
   onMouse(index) {
     this.selectionIndex = index;
   }
+
+  onEnter() {
+    console.log('Enter');
+  }
+
 }

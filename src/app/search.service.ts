@@ -3,7 +3,6 @@ import {Observable, of} from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {SearchResult} from './SearchResult';
-import {BankAccount} from './BankAccount';
 
 @Injectable({
   providedIn: 'root'
