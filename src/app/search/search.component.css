@@ -28,10 +28,6 @@ search-result li {
   display: inline-block;
 }
 
-.search-result li:hover {
-  background-color: pink;
-}
-
 .search-result li.selected {
   background-color: pink;
 }
