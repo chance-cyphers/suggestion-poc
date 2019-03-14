@@ -11,15 +11,29 @@ import {Subject} from 'rxjs';
 export class SearchComponent implements OnInit {
   searchTerm$ = new Subject<string>();
   results: string[];
+  selectionIndex = -1;
+
 
   constructor(private searchService: SearchService) {
+  }
+
+  onUp() {
+    if (this.selectionIndex > -1) {
+      this.selectionIndex--;
+    }
+  }
+
+  onDown(event) {
+    if (this.selectionIndex < this.results.length - 1) {
+      this.selectionIndex++;
+    }
+  }
+
+  ngOnInit() {
     this.searchService.search(this.searchTerm$)
       .subscribe(results => {
         this.results = results;
       });
-  }
-
-  ngOnInit() {
   }
 
 }

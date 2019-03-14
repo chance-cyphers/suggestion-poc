@@ -34,7 +34,6 @@ export class SearchService {
         },
       }).pipe(
         map(data => {
-          // return data.hits.hits.map(hit => hit._source);
           return data.suggest.peepsSuggest[0].options.map(o => o.text)
         }),
         catchError((err) => {

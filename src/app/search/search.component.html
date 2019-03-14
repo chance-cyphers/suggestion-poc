@@ -1,9 +1,13 @@
 <div>
   <div class="search-container">
-    <input #searchBox id="search-box" (keyup)="searchTerm$.next($event.target.value)">
+    <input id="search-box"
+           autocomplete="off"
+           (keyup)="searchTerm$.next($event.target.value)"
+           (keydown.arrowup)="onUp($event)"
+           (keydown.arrowdown)="onDown($event)">
     <ul class="search-result">
-      <li *ngFor="let result of results">
-        {{result}}
+      <li *ngFor="let result of results; let i = index" [class.selected]="i === selectionIndex">
+        {{result}}: {{i}}
       </li>
     </ul>
   </div>

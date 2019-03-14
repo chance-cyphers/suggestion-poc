@@ -32,6 +32,10 @@ search-result li {
   background-color: pink;
 }
 
+.search-result li.selected {
+  background-color: pink;
+}
+
 #search-box {
   width: 200px;
   height: 20px;
