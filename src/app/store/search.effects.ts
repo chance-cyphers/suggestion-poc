@@ -23,6 +23,4 @@ export class SearchEffects {
     switchMap(term => this.searchService.searchEntries(term))
   );
 
-
-
 }

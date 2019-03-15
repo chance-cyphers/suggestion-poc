@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from '../search.service';
 import {Store} from '@ngrx/store';
-import {DownArrow, KeyTyped, MouseOverSuggestion, UpArrow} from '../store/search.action';
+import {DownArrow, KeyTyped, MouseOverSuggestion, SelectFilter, UpArrow} from '../store/search.action';
 import {AppState} from '../app.state';
 
 @Component({
@@ -38,10 +38,14 @@ export class SearchComponent implements OnInit {
   }
 
   onEnter() {
+    this.store.dispatch(new SelectFilter())
   }
 
   onKeyUp(terms: string) {
     this.store.dispatch(new KeyTyped(terms));
   }
 
+  onClick() {
+    this.store.dispatch(new SelectFilter());
+  }
 }

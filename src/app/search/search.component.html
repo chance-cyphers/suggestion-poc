@@ -9,7 +9,8 @@
     <ul class="search-result">
       <li *ngFor="let suggestion of suggestions; let i = index"
           [class.selected]="i === selectionIndex"
-          (mouseenter)="onMouse(i)">
+          (mouseenter)="onMouse(i)"
+          (mousedown)="onClick()">
         {{suggestion}}
       </li>
     </ul>

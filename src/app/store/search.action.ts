@@ -5,6 +5,7 @@ export const RECEIVE_SUGGESTIONS = '[search] RECEIVE_SUGGESTIONS';
 export const UP_ARROW = '[search] UP_ARROW';
 export const DOWN_ARROW = '[search] DOWN_ARROW';
 export const MOUSE_OVER_SUGGESTION = '[search] MOUSE_OVER_SUGGESTION';
+export const SELECT_FILTER = '[search] SELECT_FILTER';
 
 export class KeyTyped implements Action {
   readonly type = KEY_TYPED;
@@ -35,8 +36,13 @@ export class MouseOverSuggestion implements Action {
   }
 }
 
+export class SelectFilter implements Action {
+  readonly type = SELECT_FILTER;
+}
+
 export type All = KeyTyped
   | ReceiveSuggestions
   | UpArrow
   | DownArrow
-  | MouseOverSuggestion;
+  | MouseOverSuggestion
+  | SelectFilter;

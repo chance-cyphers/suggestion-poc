@@ -1,5 +1,5 @@
 import {initializeSearchState, SearchState} from './search.state';
-import {All, DOWN_ARROW, KEY_TYPED, MOUSE_OVER_SUGGESTION, RECEIVE_SUGGESTIONS, UP_ARROW} from './search.action';
+import {All, DOWN_ARROW, KEY_TYPED, MOUSE_OVER_SUGGESTION, RECEIVE_SUGGESTIONS, SELECT_FILTER, UP_ARROW} from './search.action';
 
 type Action = All;
 
@@ -31,6 +31,15 @@ export function searchReducer(state = defaultState, action: Action) {
       return {
         ...state,
         suggestions: action.suggestions
+      };
+
+    case SELECT_FILTER:
+      if (state.selectionIndex < 0 || state.filters.includes(state.suggestions[state.selectionIndex])) {
+        return state;
+      }
+      return {
+        ...state,
+        filters: [...state.filters, state.suggestions[state.selectionIndex]]
       };
 
     default:
