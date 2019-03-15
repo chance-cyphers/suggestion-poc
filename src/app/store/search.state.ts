@@ -1,13 +1,11 @@
 export interface SearchState {
   words: string;
+  suggestions: string[];
 }
 
 export const initializeSearchState = () => {
   return {
-    words: "hello ngrx"
+    words: "hello ngrx",
+    suggestions: []
   }
 };
-
-// export interface AppState {
-//   search:
-// }

@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from '../search.service';
-import {Observable, Subject} from 'rxjs';
-import {SearchState} from '../store/search.state';
 import {Store} from '@ngrx/store';
 import {KeyTyped} from '../store/search.action';
 import {AppState} from '../app.state';
@@ -13,21 +11,17 @@ import {AppState} from '../app.state';
   providers: [SearchService]
 })
 export class SearchComponent implements OnInit {
-  searchTerm$ = new Subject<string>();
-  results: string[];
   selectionIndex = -1;
-  someState$: Observable<string>;
+  suggestions: string[];
 
   constructor(private searchService: SearchService,
               private store: Store<AppState>) {
   }
 
   ngOnInit() {
-    this.someState$ = this.store.select(state => state.search.words);
-    this.searchService.search(this.searchTerm$)
-      .subscribe(results => {
-        this.results = results;
-      });
+    this.store.select(state => state.search.suggestions).subscribe(s => {
+      this.suggestions = s;
+    });
   }
 
   onUp() {
@@ -37,7 +31,7 @@ export class SearchComponent implements OnInit {
   }
 
   onDown() {
-    if (this.selectionIndex < this.results.length - 1) {
+    if (this.selectionIndex < this.suggestions.length - 1) {
       this.selectionIndex++;
     }
   }
@@ -47,7 +41,10 @@ export class SearchComponent implements OnInit {
   }
 
   onEnter() {
-    this.store.dispatch(new KeyTyped());
+  }
+
+  onKeyUp(terms: string) {
+    this.store.dispatch(new KeyTyped(terms));
   }
 
 }

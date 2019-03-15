@@ -6,6 +6,8 @@ import {SearchComponent} from './search/search.component';
 import {HttpClientModule} from '@angular/common/http';
 import {StoreModule} from '@ngrx/store';
 import {searchReducer} from './store/search.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import {SearchEffects} from './store/search.effects';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import {searchReducer} from './store/search.reducer';
   imports: [
     BrowserModule,
     HttpClientModule,
-    StoreModule.forRoot({search: searchReducer})
+    StoreModule.forRoot({search: searchReducer}),
+    EffectsModule.forRoot([SearchEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
