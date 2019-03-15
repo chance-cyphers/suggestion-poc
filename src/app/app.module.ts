@@ -6,14 +6,17 @@ import {SearchComponent} from './search/search.component';
 import {HttpClientModule} from '@angular/common/http';
 import {StoreModule} from '@ngrx/store';
 import {searchReducer} from './store/search.reducer';
-import { EffectsModule } from '@ngrx/effects';
+import {EffectsModule} from '@ngrx/effects';
 import {SearchEffects} from './store/search.effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {SearchFilterPillComponent} from './search-filter-pill/search-filter-pill.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent
+    SearchComponent,
+    SearchFilterPillComponent
   ],
   imports: [
     BrowserModule,
@@ -22,9 +25,11 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
     EffectsModule.forRoot([SearchEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 5
-    })
+    }),
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

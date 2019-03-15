@@ -15,4 +15,9 @@
       </li>
     </ul>
   </div>
+  <mat-chip-list class="mat-chip-list-stacked" aria-orientation="vertical">
+    <div *ngFor="let filter of filters">
+      <app-search-filter-pill [filter]="filter"></app-search-filter-pill>
+    </div>
+  </mat-chip-list>
 </div>

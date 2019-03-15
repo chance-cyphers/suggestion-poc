@@ -13,6 +13,7 @@ import {AppState} from '../app.state';
 export class SearchComponent implements OnInit {
   selectionIndex: number;
   suggestions: string[];
+  filters: string[];
 
   constructor(private searchService: SearchService,
               private store: Store<AppState>) {
@@ -22,6 +23,7 @@ export class SearchComponent implements OnInit {
     this.store.select(state => state.search).subscribe(s => {
       this.suggestions = s.suggestions;
       this.selectionIndex = s.selectionIndex;
+      this.filters = s.filters;
     });
   }
 
