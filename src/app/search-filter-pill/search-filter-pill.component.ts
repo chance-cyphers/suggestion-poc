@@ -18,7 +18,6 @@ export class SearchFilterPillComponent implements OnInit {
   }
 
   remove() {
-    console.log('removing');
     this.store.dispatch(new RemoveFilter(this.filter));
   }
 }
