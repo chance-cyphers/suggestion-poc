@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from '../search.service';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
+import {SearchState} from '../store/search.state';
+import {Store} from '@ngrx/store';
+import {KeyTyped} from '../store/search.action';
+import {AppState} from '../app.state';
 
 @Component({
   selector: 'app-search',
@@ -12,11 +16,14 @@ export class SearchComponent implements OnInit {
   searchTerm$ = new Subject<string>();
   results: string[];
   selectionIndex = -1;
+  someState$: Observable<string>;
 
-  constructor(private searchService: SearchService) {
+  constructor(private searchService: SearchService,
+              private store: Store<AppState>) {
   }
 
   ngOnInit() {
+    this.someState$ = this.store.select(state => state.search.words);
     this.searchService.search(this.searchTerm$)
       .subscribe(results => {
         this.results = results;
@@ -35,13 +42,12 @@ export class SearchComponent implements OnInit {
     }
   }
 
-
   onMouse(index) {
     this.selectionIndex = index;
   }
 
   onEnter() {
-    console.log('Enter');
+    this.store.dispatch(new KeyTyped());
   }
 
 }

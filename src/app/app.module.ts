@@ -4,6 +4,8 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {SearchComponent} from './search/search.component';
 import {HttpClientModule} from '@angular/common/http';
+import {StoreModule} from '@ngrx/store';
+import {searchReducer} from './store/search.reducer';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,8 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({search: searchReducer})
   ],
   providers: [],
   bootstrap: [AppComponent]
