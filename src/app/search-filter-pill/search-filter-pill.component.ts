@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {AppState} from '../app.state';
+import {RemoveFilter} from '../store/search.action';
 
 @Component({
   selector: 'app-search-filter-pill',
@@ -9,9 +12,13 @@ export class SearchFilterPillComponent implements OnInit {
 
   @Input() filter: string;
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
   }
 
+  remove() {
+    console.log('removing');
+    this.store.dispatch(new RemoveFilter(this.filter));
+  }
 }
