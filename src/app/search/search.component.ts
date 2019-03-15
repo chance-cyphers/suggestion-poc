@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from '../search.service';
 import {Store} from '@ngrx/store';
-import {KeyTyped} from '../store/search.action';
+import {DownArrow, KeyTyped, MouseOverSuggestion, UpArrow} from '../store/search.action';
 import {AppState} from '../app.state';
 
 @Component({
@@ -11,7 +11,7 @@ import {AppState} from '../app.state';
   providers: [SearchService]
 })
 export class SearchComponent implements OnInit {
-  selectionIndex = -1;
+  selectionIndex: number;
   suggestions: string[];
 
   constructor(private searchService: SearchService,
@@ -19,25 +19,22 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.select(state => state.search.suggestions).subscribe(s => {
-      this.suggestions = s;
+    this.store.select(state => state.search).subscribe(s => {
+      this.suggestions = s.suggestions;
+      this.selectionIndex = s.selectionIndex;
     });
   }
 
   onUp() {
-    if (this.selectionIndex > -1) {
-      this.selectionIndex--;
-    }
+    this.store.dispatch(new UpArrow());
   }
 
   onDown() {
-    if (this.selectionIndex < this.suggestions.length - 1) {
-      this.selectionIndex++;
-    }
+    this.store.dispatch(new DownArrow());
   }
 
   onMouse(index) {
-    this.selectionIndex = index;
+    this.store.dispatch(new MouseOverSuggestion(index));
   }
 
   onEnter() {
