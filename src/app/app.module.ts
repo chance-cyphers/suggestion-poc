@@ -8,6 +8,7 @@ import {StoreModule} from '@ngrx/store';
 import {searchReducer} from './store/search.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import {SearchEffects} from './store/search.effects';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,10 @@ import {SearchEffects} from './store/search.effects';
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot({search: searchReducer}),
-    EffectsModule.forRoot([SearchEffects])
+    EffectsModule.forRoot([SearchEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 5
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
