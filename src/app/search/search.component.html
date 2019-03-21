@@ -1,14 +1,19 @@
 <div>
   <div class="search-container">
-    <input id="search-box"
-           autocomplete="off"
-           (keyup)="onKeyUp($event.target.value)"
-           (keydown.arrowup)="onUp($event)"
-           (keydown.arrowdown)="onDown($event)"
-           (keydown.enter)="onEnter($event)">
-    <ul class="search-result">
+    <div class="input-group mb-3">
+      <input id="search-box"
+             class="form-control mt-3"
+             autocomplete="off"
+             placeholder="search..."
+             (keyup)="onKeyUp($event.target.value)"
+             (keydown.arrowup)="onUp($event)"
+             (keydown.arrowdown)="onDown($event)"
+             (keydown.enter)="onEnter($event)">
+    </div>
+    <ul class="list-group">
       <li *ngFor="let suggestion of suggestions; let i = index"
-          [class.selected]="i === selectionIndex"
+          class="list-group-item"
+          [class.active]="i === selectionIndex"
           (mouseenter)="onMouse(i)"
           (mousedown)="onClick()">
         {{suggestion}}

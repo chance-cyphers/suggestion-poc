@@ -11,12 +11,14 @@ import {SearchEffects} from './store/search.effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {SearchFilterPillComponent} from './search-filter-pill/search-filter-pill.component';
 import {MatChipsModule} from '@angular/material/chips';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    SearchFilterPillComponent
+    SearchFilterPillComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
